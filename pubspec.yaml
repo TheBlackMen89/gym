@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.9
   animate_do: ^3.1.2
+  camera: ^0.10.5+5
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:
@@ -55,10 +57,11 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/ogma.jpg
-    - assets/ogma.png
-    - assets/ogma.svg
-
+    
+    - assets/logos/ogma.png
+    - assets/logos/ogma.svg
+    - assets/logos/ogma (3).svg
+    - assets/users/yo.jpg
 
 
   # The following line ensures that the Material Icons font is

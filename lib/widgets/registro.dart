@@ -22,13 +22,13 @@ class Registro extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/ogma.png'),
-                  const SizedBox(height: 25.0),
+                  Image.asset('assets/logos/ogma.png'),
+                  const SizedBox(height: 20.0),
                   Title(
                       color: Colors.white,
                       child: const Text('Registrate',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ))),
                   const SizedBox(height: 25.0),
@@ -40,7 +40,9 @@ class Registro extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ))),
                   const SizedBox(height: 20.0),
-                  TextField(
+                  SizedBox(
+                    width: 300,
+                  child: TextField(
                     controller: usernameController,
                     decoration: const InputDecoration(
                       labelText: 'Usuario...',
@@ -48,6 +50,7 @@ class Registro extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
+                  ),
                   ),
                   const SizedBox(height: 20.0),
                   Title(
@@ -58,7 +61,9 @@ class Registro extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ))),
                   const SizedBox(height: 20.0),
-                  TextField(
+                  SizedBox(
+                    width: 300,
+                  child: TextField(
                     controller: emailController,
                     decoration: const InputDecoration(
                       labelText: 'Correo electrónico...',
@@ -66,6 +71,7 @@ class Registro extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
+                  ),
                   ),
                   const SizedBox(height: 20.0),
                   Title(
@@ -76,7 +82,9 @@ class Registro extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ))),
                   const SizedBox(height: 20.0),
-                  TextField(
+                  SizedBox(
+                    width: 300,
+                  child: TextField(
                     controller: passwordController,
                     decoration: const InputDecoration(
                       labelText: 'Contraseña...',
@@ -85,6 +93,7 @@ class Registro extends StatelessWidget {
                       ),
                     ),
                     obscureText: true,
+                  ),
                   ),
                   const SizedBox(height: 30.0),
                   ElevatedButton(
@@ -101,7 +110,7 @@ class Registro extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 243, 88, 22),
+                        backgroundColor: const Color.fromARGB(255, 243, 144, 22),
                         fixedSize: const Size(180, 30)),
                     child: const Text('Resgistrar'),
                   ),
@@ -115,12 +124,12 @@ class Registro extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 253, 254, 255),
+                        backgroundColor: const Color.fromARGB(255, 255, 0, 0),
                         fixedSize: const Size(180, 30)),
                     child: const Text(
                       'Cancelar',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 246, 245, 245),
                       ),
                     ),
                   ),
