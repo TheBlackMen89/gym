@@ -14,7 +14,6 @@ class Registro extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.white,
-        //width: 400,
         child: Center(
           child: FadeInRightBig(
             child: Padding(
@@ -22,7 +21,7 @@ class Registro extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/logos/ogma.png'),
+                  Image.asset('assets/logos/ogma.png', width: 400,),
                   const SizedBox(height: 20.0),
                   Title(
                       color: Colors.white,
@@ -111,10 +110,10 @@ class Registro extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 243, 144, 22),
-                        fixedSize: const Size(180, 30)),
+                        fixedSize: const Size(180, 20)),
                     child: const Text('Resgistrar'),
                   ),
-                  const SizedBox(height: 15.0),
+                  const SizedBox(height: 10.0),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -125,7 +124,7 @@ class Registro extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 255, 0, 0),
-                        fixedSize: const Size(180, 30)),
+                        fixedSize: const Size(180, 20)),
                     child: const Text(
                       'Cancelar',
                       style: TextStyle(

@@ -7,13 +7,22 @@ import 'package:gym/widgets/login.dart';
 import 'package:gym/widgets/popup.dart';
 
 class Principal extends StatelessWidget {
-  const Principal({super.key});
+  Principal({super.key});
 
-  
+  final List<String> listaDeImagenes = [
+    'assets/maquinas/maquina1.png',
+    'assets/maquinas/maquina2.png',
+    'assets/maquinas/maquina3.png',
+    'assets/maquinas/maquina4.png',
+    'assets/maquinas/maquina5.png',
+    'assets/maquinas/maquina6.png',
+    'assets/maquinas/maquina7.png',
+    'assets/maquinas/maquina8.png',
+    'assets/maquinas/maquina9.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -21,7 +30,7 @@ class Principal extends StatelessWidget {
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         leadingWidth: 200,
         leading: SvgPicture.asset(
@@ -31,16 +40,7 @@ class Principal extends StatelessWidget {
           width: 700,
           height: 300,
         ),
-        //backgroundColor: Colors.transparent,
-        //title: const Text('Mi Aplicación'),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            color: Colors.black, // Botón de búsqueda
-            onPressed: () {
-              // Lógica de búsqueda
-            },
-          ),
           IconButton(
             icon: const Icon(Icons.exit_to_app),
             color: Colors.black,
@@ -54,34 +54,99 @@ class Principal extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        //width: 450,
-        color: Colors.white,
-        child: Center(
-          child: FadeInRightBig(
-            child: Column(
-              children: [
-                const Pic(size: 200, asset: 'assets/users/yo.jpg'),
-                const SizedBox(
-                  height: 25,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navega a la pantalla "Camara" al presionar el botón
-                    Camara.opciones(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                        fixedSize: const Size(60, 40)),
-                  child: const Icon(Icons.camera, color: Colors.black,),
-                ),
-              ],
+      body: ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+          Center(
+            child: FadeInRightBig(
+              child: Column(
+                children: [
+                  const Pic(size: 150, asset: 'assets/users/yo.jpg'),
+                  const SizedBox(height: 25),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigate to the "Camara" screen when the button is pressed
+                      Camara.opciones(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      fixedSize: const Size(60, 40),
+                    ),
+                    child: const Icon(Icons.camera, color: Colors.black),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+          ),
+          //const SizedBox(height: 20.0),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return Column(
+                children: <Widget>[
+                  Container(
+                    width: 500,
+                    height: 50.0,
+                    color: Colors.green,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Icon(Icons.sports_gymnastics,
+                            color: Colors.white),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 5.0),
+                        ),
+                        Text(
+                          index.toString(),
+                          style: const TextStyle(
+                              fontSize: 20.0, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 500,
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      physics: const NeverScrollableScrollPhysics(),
+                      childAspectRatio: 1.2,
+                      children: List.generate(
+                        listaDeImagenes.length,
+                        (index) {
+                          return InkWell(
+                            onTap: () {
+                              // Logica al tocar el Card
+                            },
+                            splashColor:
+                                Colors.grey, // Color del realce al tocar
+                            highlightColor: Colors.transparent,
+                            child: Card(
+                              color: Colors.white,
+                              child: Image.asset(
+                                listaDeImagenes[index],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                ],
+              );
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.transparent,
+        color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -91,19 +156,19 @@ class Principal extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Principal()),
+                  MaterialPageRoute(builder: (context) => Principal()),
                 );
               },
             ),
             IconButton(
-              icon: const Icon(Icons.add_card),
+              icon: const Icon(Icons.calendar_month_outlined),
               color: Colors.black,
               onPressed: () {
                 // Navegar a la página de búsqueda
               },
             ),
             IconButton(
-              icon: const Icon(Icons.notifications),
+              icon: const Icon(Icons.sports_gymnastics),
               color: Colors.black,
               onPressed: () {
                 // Navegar a la página de notificaciones

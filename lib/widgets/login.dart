@@ -14,7 +14,6 @@ class Login extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.white,
-        //width: 400,
         child: Center(
           child: FadeInDownBig(
             child: Padding(
@@ -22,7 +21,7 @@ class Login extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/logos/ogma.png'),
+                  Image.asset('assets/logos/ogma.png', width: 400,),
                   const SizedBox(height: 40.0),
                   Title(
                       color: Colors.white,
@@ -71,7 +70,7 @@ class Login extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Principal()),
+                              builder: (context) => Principal()),
                         );
                       }
                     },

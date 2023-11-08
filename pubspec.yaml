@@ -62,6 +62,15 @@ flutter:
     - assets/logos/ogma.svg
     - assets/logos/ogma (3).svg
     - assets/users/yo.jpg
+    - assets/maquinas/maquina1.png
+    - assets/maquinas/maquina2.png
+    - assets/maquinas/maquina3.png
+    - assets/maquinas/maquina4.png
+    - assets/maquinas/maquina5.png
+    - assets/maquinas/maquina6.png
+    - assets/maquinas/maquina7.png
+    - assets/maquinas/maquina8.png
+    - assets/maquinas/maquina9.png
 
 
   # The following line ensures that the Material Icons font is
