@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:gym/widgets/principal.dart';
+import 'package:gym/widgets/registro.dart';
+
 
 class Login extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -62,32 +64,27 @@ class Login extends StatelessWidget {
                         // Navega a la página de inicio (HomePage)
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => principal()),
+                          MaterialPageRoute(builder: (context) => const Principal()),
                         );
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 243, 88, 22),
+                        backgroundColor: const Color.fromARGB(255, 243, 88, 22),
                         fixedSize: const Size(180, 30)),
                     child: const Text('Iniciar sesión'),
                   ),
                   const SizedBox(height: 15.0),
                   TextButton(
                     onPressed: () {
-                      final email = emailController.text;
-                      final password = passwordController.text;
-
-                      // Validar el inicio de sesión (por ejemplo, usando credenciales predefinidas)
-                      if (email == 'admin' && password == '123') {
-                        // Navega a la página de inicio (HomePage)
+                      
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => principal()),
+                          MaterialPageRoute(builder: (context) => Registro()),
                         );
-                      }
+                      
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 253, 254, 255),
+                        backgroundColor: const Color.fromARGB(255, 253, 254, 255),
                         fixedSize: const Size(180, 30)),
                     child: const Text(
                       'Registrate',
