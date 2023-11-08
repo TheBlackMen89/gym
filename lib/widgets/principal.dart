@@ -54,8 +54,9 @@ class Principal extends StatelessWidget {
           ),
         ],
       ),
-      body: SizedBox(
-        width: 450,
+      body: Container(
+        //width: 450,
+        color: Colors.white,
         child: Center(
           child: FadeInRightBig(
             child: Column(

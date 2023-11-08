@@ -13,8 +13,8 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color.fromARGB(255, 255, 255,
-            255), // Cambia el color de fondo de la página de inicio de sesión
+        color: Colors.white,
+        //width: 400,
         child: Center(
           child: FadeInDownBig(
             child: Padding(
@@ -66,6 +66,7 @@ class Login extends StatelessWidget {
 
                       // Validar el inicio de sesión (por ejemplo, usando credenciales predefinidas)
                       if (email == 'admin' && password == '123') {
+                        
                         // Navega a la página de inicio (HomePage)
                         Navigator.push(
                           context,

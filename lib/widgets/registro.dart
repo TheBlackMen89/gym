@@ -13,8 +13,8 @@ class Registro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color.fromARGB(255, 255, 255,
-            255), // Cambia el color de fondo de la página de inicio de sesión
+        color: Colors.white,
+        //width: 400,
         child: Center(
           child: FadeInRightBig(
             child: Padding(
@@ -117,7 +117,7 @@ class Registro extends StatelessWidget {
                   const SizedBox(height: 15.0),
                   TextButton(
                     onPressed: () {
-                      //Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Login()),
