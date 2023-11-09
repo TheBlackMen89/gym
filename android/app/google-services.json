@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "917801962298",
+    "project_id": "gym-flutter-u",
+    "storage_bucket": "gym-flutter-u.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917801962298:android:a71757b18151b06052de03",
+        "android_client_info": {
+          "package_name": "com.example.gym"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZDBrtA8JkilnBctW4Lncps07CqDmbMcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

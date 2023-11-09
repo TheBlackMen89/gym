@@ -1,8 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/widgets/login.dart';
 import 'package:animate_do/animate_do.dart';
 
 class Registro extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  DatabaseReference dbRef =
+      FirebaseDatabase.instance.reference().child("clientes");
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -70,6 +76,24 @@ class Registro extends StatelessWidget {
                   const SizedBox(height: 20.0),
                   Title(
                       color: Colors.white,
+                      child: const Text('Correo Electronico',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ))),
+                  const SizedBox(height: 20.0),
+                  TextField(
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                      labelText: 'Correo electrónico...',
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Title(
+                      color: Colors.white,
                       child: const Text('Contraseña',
                           style: TextStyle(
                             fontSize: 14,
@@ -94,11 +118,7 @@ class Registro extends StatelessWidget {
                       //final password = passwordController.text;
 
                       //logica para guardar en la bd
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      );
+                      registerToFb();                     
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 243, 88, 22),
@@ -131,5 +151,40 @@ class Registro extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void registerToFb() {
+    firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text)
+        .then((result) {
+      dbRef.child(result.user!.uid).set({
+        "email": emailController.text,
+        "age": "",
+        "name": ""
+      }).then((res) {        
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Home(uid: result.user!.uid)),
+        );
+      });
+    }).catchError((err) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text(err.message),
+              actions: [
+                TextButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    });
   }
 }
