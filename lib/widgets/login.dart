@@ -3,7 +3,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:gym/widgets/principal.dart';
 import 'package:gym/widgets/registro.dart';
 
-
 class Login extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -14,8 +13,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color.fromARGB(255, 255, 255,
-            255), // Cambia el color de fondo de la página de inicio de sesión
+        color: Colors.white,
         child: Center(
           child: FadeInDownBig(
             child: Padding(
@@ -23,7 +21,7 @@ class Login extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/ogma.png'),
+                  Image.asset('assets/logos/ogma.png', width: 400,),
                   const SizedBox(height: 40.0),
                   Title(
                       color: Colors.white,
@@ -33,25 +31,31 @@ class Login extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ))),
                   const SizedBox(height: 40.0),
-                  TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Correo electrónico...',
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
+                  SizedBox(
+                    width: 300,
+                    child: TextField(
+                      controller: emailController,
+                      decoration: const InputDecoration(
+                        labelText: 'Correo electrónico...',
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  TextField(
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                      labelText: 'Contraseña...',
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
+                  SizedBox(
+                    width: 300,
+                    child: TextField(
+                      controller: passwordController,
+                      decoration: const InputDecoration(
+                        labelText: 'Contraseña...',
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
                       ),
+                      obscureText: true,
                     ),
-                    obscureText: true,
                   ),
                   const SizedBox(height: 30.0),
                   ElevatedButton(
@@ -61,10 +65,12 @@ class Login extends StatelessWidget {
 
                       // Validar el inicio de sesión (por ejemplo, usando credenciales predefinidas)
                       if (email == 'admin' && password == '123') {
+                        
                         // Navega a la página de inicio (HomePage)
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Principal()),
+                          MaterialPageRoute(
+                              builder: (context) => Principal()),
                         );
                       }
                     },
@@ -76,15 +82,14 @@ class Login extends StatelessWidget {
                   const SizedBox(height: 15.0),
                   TextButton(
                     onPressed: () {
-                      
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Registro()),
-                        );
-                      
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Registro()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 253, 254, 255),
+                        backgroundColor:
+                            const Color.fromARGB(255, 253, 254, 255),
                         fixedSize: const Size(180, 30)),
                     child: const Text(
                       'Registrate',
