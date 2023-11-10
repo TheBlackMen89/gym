@@ -3,9 +3,16 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/widgets/login.dart';
 import 'package:animate_do/animate_do.dart';
+import 'principal.dart';
 
 class Registro extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
+ 
+  final formKey = GlobalKey<FormState>();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref().child("clientes");
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -35,7 +42,7 @@ class Registro extends StatelessWidget {
                   const SizedBox(height: 25.0),
                   Title(
                       color: Colors.white,
-                      child: const Text('Usuario',
+                      child: const Text('Nombres',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -44,9 +51,51 @@ class Registro extends StatelessWidget {
                   SizedBox(
                     width: 300,
                   child: TextField(
-                    controller: usernameController,
+                    controller: firstNameController,
                     decoration: const InputDecoration(
-                      labelText: 'Usuario...',
+                      labelText: 'Nombres...',
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Title(
+                      color: Colors.white,
+                      child: const Text('Apellidos',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ))),
+                  const SizedBox(height: 20.0),
+                  SizedBox(
+                    width: 300,
+                  child: TextField(
+                    controller: lastNameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Apellidos...',
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Title(
+                      color: Colors.white,
+                      child: const Text('Edad',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ))),
+                  const SizedBox(height: 20.0),
+                  SizedBox(
+                    width: 300,
+                  child: TextField(
+                    controller: ageController,
+                    decoration: const InputDecoration(
+                      labelText: 'Edad...',
                       errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
                       ),
@@ -99,16 +148,8 @@ class Registro extends StatelessWidget {
                   const SizedBox(height: 30.0),
                   ElevatedButton(
                     onPressed: () {
-                      //final username = usernameController;
-                      //final email = emailController.text;
-                      //final password = passwordController.text;
-
-                      //logica para guardar en la bd
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      );
+                      //GUARDAR EN FIREBASE AUTHENTICATION Y FIREBASE REAL TIME DATABASE                      
+                      registerToFb(context);                      
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 243, 144, 22),
@@ -141,5 +182,43 @@ class Registro extends StatelessWidget {
         ),
       ),
     );
+    
   }
+void registerToFb(BuildContext context) {
+    firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text)
+        .then((result) {
+      dbRef.child(result.user!.uid).set({
+        "correo": emailController.text,
+        "edad": ageController.text,
+        "nombres": firstNameController.text,
+        "apellidos": lastNameController.text,
+        "id_user": "1000618718"
+      }).then((res) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Principal(uid: result.user!.uid)),
+        );
+      });
+    }).catchError((err) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text(err.message),
+              actions: [
+                TextButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    });
+  }
+  
 }

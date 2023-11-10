@@ -44,37 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDc-Tyw3NCUbyGc09TplYTn5D0iXoI51qY',
-    appId: '1:917801962298:web:5d1d8f34a43c6de652de03',
-    messagingSenderId: '917801962298',
-    projectId: 'gym-flutter-u',
-    authDomain: 'gym-flutter-u.firebaseapp.com',
-    storageBucket: 'gym-flutter-u.appspot.com',
+    apiKey: 'AIzaSyBt5OzRyjN0AmXDR2rNv7KbUgdUC46Zn1c',
+    appId: '1:350397722393:web:572e19176ae2eaa98ddf88',
+    messagingSenderId: '350397722393',
+    projectId: 'crud-futter-9501a',
+    authDomain: 'crud-futter-9501a.firebaseapp.com',
+    storageBucket: 'crud-futter-9501a.appspot.com',
+    measurementId: 'G-H3KNE2RF0K',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBZDBrtA8JkilnBctW4Lncps07CqDmbMcI',
-    appId: '1:917801962298:android:a71757b18151b06052de03',
-    messagingSenderId: '917801962298',
-    projectId: 'gym-flutter-u',
-    storageBucket: 'gym-flutter-u.appspot.com',
+    apiKey: 'AIzaSyB2kLTgojTvyaCrGDBV5YYgSpj4nLZswRk',
+    appId: '1:350397722393:android:d714651889830c1b8ddf88',
+    messagingSenderId: '350397722393',
+    projectId: 'crud-futter-9501a',
+    storageBucket: 'crud-futter-9501a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBZFw-cSGOSr57SC35MZq3ceD9RUc0iTcs',
-    appId: '1:917801962298:ios:7a5f31ece6b603e352de03',
-    messagingSenderId: '917801962298',
-    projectId: 'gym-flutter-u',
-    storageBucket: 'gym-flutter-u.appspot.com',
+    apiKey: 'AIzaSyCY_kC-zs0bjaPqkVB8-aETLqfuftR3DZM',
+    appId: '1:350397722393:ios:65183042fb4214ee8ddf88',
+    messagingSenderId: '350397722393',
+    projectId: 'crud-futter-9501a',
+    storageBucket: 'crud-futter-9501a.appspot.com',
     iosBundleId: 'com.example.gym',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBZFw-cSGOSr57SC35MZq3ceD9RUc0iTcs',
-    appId: '1:917801962298:ios:a3ba7867ac9429c252de03',
-    messagingSenderId: '917801962298',
-    projectId: 'gym-flutter-u',
-    storageBucket: 'gym-flutter-u.appspot.com',
+    apiKey: 'AIzaSyCY_kC-zs0bjaPqkVB8-aETLqfuftR3DZM',
+    appId: '1:350397722393:ios:d08dd1bca4d34de38ddf88',
+    messagingSenderId: '350397722393',
+    projectId: 'crud-futter-9501a',
+    storageBucket: 'crud-futter-9501a.appspot.com',
     iosBundleId: 'com.example.gym.RunnerTests',
   );
 }

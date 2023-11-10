@@ -7,7 +7,8 @@ import 'package:gym/widgets/login.dart';
 import 'package:gym/widgets/popup.dart';
 
 class Principal extends StatelessWidget {
-  Principal({super.key});
+  final String? uid;
+  Principal({this.uid});
 
   final List<String> listaDeImagenes = [
     'assets/maquinas/maquina1.png',

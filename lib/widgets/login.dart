@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:gym/widgets/principal.dart';
 import 'package:gym/widgets/registro.dart';
 
 class Login extends StatelessWidget {
+  final formKey = GlobalKey<FormState>();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -21,7 +25,10 @@ class Login extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/logos/ogma.png', width: 400,),
+                  Image.asset(
+                    'assets/logos/ogma.png',
+                    width: 400,
+                  ),
                   const SizedBox(height: 40.0),
                   Title(
                       color: Colors.white,
@@ -59,20 +66,9 @@ class Login extends StatelessWidget {
                   ),
                   const SizedBox(height: 30.0),
                   ElevatedButton(
-                    onPressed: () {
-                      final email = emailController.text;
-                      final password = passwordController.text;
-
-                      // Validar el inicio de sesión (por ejemplo, usando credenciales predefinidas)
-                      if (email == 'admin' && password == '123') {
-                        
-                        // Navega a la página de inicio (HomePage)
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Principal()),
-                        );
-                      }
+                    onPressed: () {         
+                      //LOGIN EN FIREBASE             
+                      logInToFb(context);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 243, 88, 22),
@@ -105,5 +101,35 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void logInToFb(BuildContext context) {
+    firebaseAuth
+        .signInWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text)
+        .then((result) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Principal(uid: result.user!.uid)),
+      );
+    }).catchError((err) {
+      print(err.message);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text(err.message),
+              actions: [
+                TextButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    });
   }
 }
