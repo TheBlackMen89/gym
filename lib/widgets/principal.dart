@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gym/widgets/agendamiento_maquina.dart';
 import 'package:gym/widgets/imagen.dart';
 import 'package:gym/widgets/login.dart';
 import 'package:gym/widgets/popup.dart';
@@ -164,9 +165,10 @@ class Principal extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.calendar_month_outlined),
               color: Colors.black,
-              onPressed: () {
-                // Navegar a la página de búsqueda
-              },
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => agendamientoMaquina()),
+              ),
             ),
             IconButton(
               icon: const Icon(Icons.sports_gymnastics),
