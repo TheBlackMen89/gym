@@ -1,5 +1,11 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:gym/models/Reserva.dart';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
   // Asegúrate de importar tu archivo utils.dart aquí
 
 class agendamientoMaquina extends StatefulWidget {
@@ -63,9 +69,33 @@ class _TableBasicsExampleState extends State<agendamientoMaquina> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Puedes agregar acciones adicionales cuando se presiona el botón aquí
-                       print( _focusedDay);
-                      print('Se presionó: ${_availableHours[index]}');
+                      // Pudes agregar acciones adicionales cuando se presiona el botón aquí                      
+                      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+                      String fecha = dateFormat.format(_focusedDay);                         
+                      print(fecha);                   
+                      String hora = _availableHours[index];
+                      print('Se presionó: ${hora}');
+                      String id_usuario = '1000618715';
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.warning,
+                        animType: AnimType.topSlide,
+                        showCloseIcon: true,
+                        title: "Confirmar reserva",
+                        desc: "Desea confirmar la reserva para el dia " + fecha + "  hora " + hora,
+                        btnCancelOnPress: (){},
+                        btnOkOnPress: (){
+                          guardarRservacion(fecha, hora, id_usuario);
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.topSlide,
+                            showCloseIcon: true,
+                            title: "Confirmación Exitosa"
+                            ).show();
+                        }
+                        ).show();
+
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue, // Color de fondo del botón
@@ -101,5 +131,22 @@ class _TableBasicsExampleState extends State<agendamientoMaquina> {
       '04:00 PM - 05:00 PM',
       '05:00 PM - 06:00 PM',
     ];
+  }
+
+  Future<String> guardarRservacion(String fecha, String hora, String id_usuario) async{
+    Map<String, dynamic> request = {
+      'fecha_reserva':fecha,
+      'hora_reserva':hora,
+      'id_usuario':id_usuario
+    };
+    print(request);
+    final uri = Uri.parse("https://gym-u.free.beeceptor.com/gym/create-reservation");
+    final response = await http.post(uri, body: request);
+
+    if(response.statusCode == 201){
+      return response.body;
+    }else{
+      throw Exception('Fallo el servicio reserva');
+    }
   }
 }
