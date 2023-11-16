@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -38,13 +40,16 @@ class _TableBasicsExampleState extends State<agendamientoMaquina> {
             },
             onDaySelected: (selectedDay, focusedDay) {
               if (!isSameDay(_selectedDay, selectedDay)) {
-                setState(() {
-                  _selectedDay = selectedDay;
-                  _focusedDay = focusedDay;
-                  
-                  // Lógica para obtener las horas disponibles para el día seleccionado
-                  _availableHours = obtenerHorasDisponibles(selectedDay);
-                });
+                horasDiponiblesService(selectedDay).then((horas) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;                   
+                    _availableHours = horas;
+                  });
+                }).catchError((error) {
+                  // Manejar el error si es necesario
+                  print('Error al obtener horas disponibles: $error');
+                });             
               }
             },
             onFormatChanged: (format) {
@@ -91,8 +96,8 @@ class _TableBasicsExampleState extends State<agendamientoMaquina> {
                             dialogType: DialogType.success,
                             animType: AnimType.topSlide,
                             showCloseIcon: true,
-                            title: "Confirmación Exitosa"
-                            ).show();
+                            title: "Confirmación Exitosa",                            
+                            ).show();                            
                         }
                         ).show();
 
@@ -112,25 +117,23 @@ class _TableBasicsExampleState extends State<agendamientoMaquina> {
         ],
       ),
     );
-  }
+  }  
 
-  // Función de ejemplo para obtener horas disponibles
-  List<String> obtenerHorasDisponibles(DateTime selectedDay) {
-    // Aquí deberías implementar la lógica real para obtener las horas disponibles
-    // basándote en la fecha seleccionada (_selectedDay)
-    // Esta es solo una implementación de ejemplo
-    return [
-      '08:00 AM - 09:00 AM',
-      '09:00 AM - 10:00 AM',
-      '10:00 AM - 11:00 AM',
-      '11:00 AM - 12:00 PM',
-      '12:00 PM - 01:00 PM',
-      '01:00 PM - 02:00 PM',
-      '02:00 PM - 03:00 PM',
-      '03:00 PM - 04:00 PM',
-      '04:00 PM - 05:00 PM',
-      '05:00 PM - 06:00 PM',
-    ];
+  Future<List<String>> horasDiponiblesService(DateTime selectedDay) async{    
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+    String fecha = dateFormat.format(selectedDay);       
+    final uri = Uri.parse("https://gym-u.free.beeceptor.com/gym/obtenerHorasDisponibles/" + fecha);
+    final response = await http.get(uri);
+    print(uri);
+    if(response.statusCode == 200){
+      // Convierte la cadena JSON a una lista de strings
+      final List<dynamic> horasDynamic = json.decode(response.body);
+      // Convierte la lista dinámica a una lista de strings
+      final List<String> horas = horasDynamic.map((hora) => hora.toString()).toList();
+      return horas;
+    }else{
+      throw Exception('Fallo el servicio reserva');
+    }
   }
 
   Future<String> guardarRservacion(String fecha, String hora, String id_usuario) async{
@@ -139,7 +142,6 @@ class _TableBasicsExampleState extends State<agendamientoMaquina> {
       'hora_reserva':hora,
       'id_usuario':id_usuario
     };
-    print(request);
     final uri = Uri.parse("https://gym-u.free.beeceptor.com/gym/create-reservation");
     final response = await http.post(uri, body: request);
 
