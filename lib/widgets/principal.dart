@@ -2,29 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gym/widgets/agendamiento_entrenador.dart';
 import 'package:gym/widgets/agendamiento_maquina.dart';
 import 'package:gym/widgets/imagen.dart';
 import 'package:gym/widgets/login.dart';
+import 'package:gym/widgets/maquina.dart';
 import 'package:gym/widgets/popup.dart';
 
 class Principal extends StatelessWidget {
   final String? uid;
   Principal({this.uid});
 
-  final List<String> listaDeImagenes = [
-    'assets/maquinas/maquina1.png',
-    'assets/maquinas/maquina2.png',
-    'assets/maquinas/maquina3.png',
-    'assets/maquinas/maquina4.png',
-    'assets/maquinas/maquina5.png',
-    'assets/maquinas/maquina6.png',
-    'assets/maquinas/maquina7.png',
-    'assets/maquinas/maquina8.png',
-    'assets/maquinas/maquina9.png',
+  final List<Maquina> listaDeMaquinas = [
+    const Maquina(
+        nombre: 'Máquina de pierna y gluteos',
+        imagenUrl: 'assets/maquinas/maquina1.png'),
+    const Maquina(
+        nombre: 'Máquina Biceps', imagenUrl: 'assets/maquinas/maquina2.png'),
+    const Maquina(
+        nombre: 'Peck deck o mariposa',
+        imagenUrl: 'assets/maquinas/maquina3.png'),
+    const Maquina(
+        nombre: 'Banco press', imagenUrl: 'assets/maquinas/maquina4.png'),
+    const Maquina(
+        nombre: 'Máquinas de femorales',
+        imagenUrl: 'assets/maquinas/maquina5.png'),
+    const Maquina(
+        nombre: 'Silla eliptica', imagenUrl: 'assets/maquinas/maquina6.png'),
+    const Maquina(
+        nombre: 'Máquina paralelas', imagenUrl: 'assets/maquinas/maquina7.png'),
+    const Maquina(
+        nombre: 'Máquina dorsalera y pecho',
+        imagenUrl: 'assets/maquinas/maquina8.png'),
+    const Maquina(
+        nombre: 'Mancuernas y pesas',
+        imagenUrl: 'assets/maquinas/maquina9.png'),
   ];
 
   @override
   Widget build(BuildContext context) {
+    print('El valor de uid es: $uid');
+    String userImage = (uid == '4OUXIidJpYfcHCz4GLbZo4wNBvX2')
+        ? 'assets/users/user_prolific.jpg'
+        : 'assets/users/yo.jpg';
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -63,7 +84,7 @@ class Principal extends StatelessWidget {
             child: FadeInRightBig(
               child: Column(
                 children: [
-                  const Pic(size: 150, asset: 'assets/users/yo.jpg'),
+                  Pic(size: 150, asset: userImage),
                   const SizedBox(height: 25),
                   ElevatedButton(
                     onPressed: () {
@@ -119,20 +140,35 @@ class Principal extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       childAspectRatio: 1.2,
                       children: List.generate(
-                        listaDeImagenes.length,
+                        listaDeMaquinas.length,
                         (index) {
                           return InkWell(
-                            onTap: () {
-                              // Logica al tocar el Card
-                            },
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => AgendamientoMaquina(
+                                      maquina: listaDeMaquinas[index])),
+                            ),
                             splashColor:
                                 Colors.grey, // Color del realce al tocar
                             highlightColor: Colors.transparent,
                             child: Card(
                               color: Colors.white,
-                              child: Image.asset(
-                                listaDeImagenes[index],
-                                fit: BoxFit.cover,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Image.asset(
+                                    listaDeMaquinas[index].imagenUrl,
+                                    fit: BoxFit.cover,
+                                    width: 80,
+                                    height: 80,
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    listaDeMaquinas[index].nombre,
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                ],
                               ),
                             ),
                           );
@@ -167,7 +203,7 @@ class Principal extends StatelessWidget {
               color: Colors.black,
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => agendamientoMaquina()),
+                MaterialPageRoute(builder: (_) => agendamientoEntrenador()),
               ),
             ),
             IconButton(

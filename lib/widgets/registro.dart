@@ -5,6 +5,7 @@ import 'package:gym/widgets/login.dart';
 import 'package:animate_do/animate_do.dart';
 import 'principal.dart';
 
+// ignore: must_be_immutable
 class Registro extends StatelessWidget {
  
   final formKey = GlobalKey<FormState>();
