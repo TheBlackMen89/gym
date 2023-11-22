@@ -38,7 +38,7 @@ class _TableBasicsExampleState extends State<agendamientoEntrenador> {
             },
             onDaySelected: (selectedDay, focusedDay) {
               if (!isSameDay(_selectedDay, selectedDay)) {
-                horasDiponiblesService(selectedDay).then((horas) {
+                horasDiponiblesEntrenadorService(selectedDay).then((horas) {
                   setState(() {
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;                   
@@ -117,7 +117,7 @@ class _TableBasicsExampleState extends State<agendamientoEntrenador> {
     );
   }  
 
-  Future<List<String>> horasDiponiblesService(DateTime selectedDay) async{    
+  Future<List<String>> horasDiponiblesEntrenadorService(DateTime selectedDay) async{    
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     String fecha = dateFormat.format(selectedDay);       
     final uri = Uri.parse("https://gym-u.free.beeceptor.com/gym/obtenerHorasDisponibles/" + fecha);

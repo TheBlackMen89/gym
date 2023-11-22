@@ -24,7 +24,8 @@ class _AgendamientoMaquinaState extends State<AgendamientoMaquina> {
   List<String> _availableHours = []; // Lista de horas disponibles
   DateTime kFirstDay = DateTime(
       2023, 1, 1); // Ejemplo: la primera fecha permitida en el calendario
-  DateTime kLastDay = DateTime(2023, 12, 31);
+  DateTime kLastDay = DateTime(2023, 12, 31);  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,7 @@ class _AgendamientoMaquinaState extends State<AgendamientoMaquina> {
             },
             onDaySelected: (selectedDay, focusedDay) {
               if (!isSameDay(_selectedDay, selectedDay)) {
-                horasDiponiblesService(selectedDay).then((horas) {
+                horasDiponiblesMaquinaService(selectedDay,widget.maquina.nombre).then((horas) {
                   setState(() {
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;
@@ -118,7 +119,7 @@ class _AgendamientoMaquinaState extends State<AgendamientoMaquina> {
                                   hora,
                           btnCancelOnPress: () {},
                           btnOkOnPress: () {
-                            guardarRservacion(fecha, hora, id_usuario);
+                            guardarRservacionMaquina(fecha, hora, id_usuario, widget.maquina.nombre);
                             AwesomeDialog(
                               context: context,
                               dialogType: DialogType.success,
@@ -145,12 +146,12 @@ class _AgendamientoMaquinaState extends State<AgendamientoMaquina> {
     );
   }
 
-  Future<List<String>> horasDiponiblesService(DateTime selectedDay) async {
+  Future<List<String>> horasDiponiblesMaquinaService(DateTime selectedDay, String maquina) async {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
-    String fecha = dateFormat.format(selectedDay);
+    String fecha = dateFormat.format(selectedDay);        
     final uri = Uri.parse(
         "https://gym-u.free.beeceptor.com/gym/obtenerHorasDisponibles/" +
-            fecha);
+            maquina + "/" + fecha);
     final response = await http.get(uri);
     print(uri);
     if (response.statusCode == 200) {
@@ -165,12 +166,13 @@ class _AgendamientoMaquinaState extends State<AgendamientoMaquina> {
     }
   }
 
-  Future<String> guardarRservacion(
-      String fecha, String hora, String id_usuario) async {
+  Future<String> guardarRservacionMaquina(
+      String fecha, String hora, String id_usuario, String maquina) async {
     Map<String, dynamic> request = {
       'fecha_reserva': fecha,
       'hora_reserva': hora,
-      'id_usuario': id_usuario
+      'id_usuario': id_usuario,
+      'maquina': maquina
     };
     final uri =
         Uri.parse("https://gym-u.free.beeceptor.com/gym/create-reservation");
