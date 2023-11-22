@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"debouncer",
+			"lerp",
+			"riverpod",
+			"smartbuy"
+		]
+		
+	},
+	/* cSpell:disable */
+	"extensions": {"recommendations": [
+		"dart-code.flutter",
+		"nash.awesome-flutter-snippets",
+		"aaron-bond.better-comments",
+		"streetsidesoftware.code-spell-checker",
+		"streetsidesoftware.code-spell-checker-spanish",
+		"adpyke.codesnap",
+		"naumovs.color-highlight",
+		"dotup.dart-data-class-generator",
+		"mrmlnc.vscode-duplicate",
+		"alexisvt.flutter-snippets",
+		"amiralizadeh9480.flutter-widget-wrap",
+		"gmlewis-vscode.flutter-stylizer",
+		"jasonlhy.hungry-delete",
+		"hirantha.json-to-dart",
+		"tyriar.lorem-ipsum",
+		"zaferayan.lorem-picsum",
+		"gruntfuggly.todo-tree",
+		"usernamehw.errorlens",
+		"marcelovelasquez.flutter-tree",
+		"circlecodesolution.ccs-flutter-color",
+		"robert-brunhage.flutter-riverpod-snippets"
+	]}
+}
