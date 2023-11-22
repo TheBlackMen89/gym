@@ -8,6 +8,8 @@ import 'package:gym/widgets/imagen.dart';
 import 'package:gym/widgets/login.dart';
 import 'package:gym/widgets/maquina.dart';
 import 'package:gym/widgets/popup.dart';
+import 'package:gym/widgets/routine.dart';
+
 
 class Principal extends StatelessWidget {
   final String? uid;
@@ -209,9 +211,11 @@ class Principal extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.sports_gymnastics),
               color: Colors.black,
-              onPressed: () {
-                // Navegar a la página de notificaciones
-              },
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Routine()),
+              ),
+              // Navegar a Rutinas de la App
             ),
             IconButton(
               icon: const Icon(Icons.mail),

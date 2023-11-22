@@ -70,12 +70,12 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    
     - assets/logos/ogma.png
     - assets/logos/ogma.svg
     - assets/logos/ogma (3).svg
     - assets/users/yo.jpg
     - assets/users/user_prolific.jpg
+  # Maquina
     - assets/maquinas/maquina1.png
     - assets/maquinas/maquina2.png
     - assets/maquinas/maquina3.png
@@ -85,7 +85,18 @@ flutter:
     - assets/maquinas/maquina7.png
     - assets/maquinas/maquina8.png
     - assets/maquinas/maquina9.png
-
+  # Rutinas
+    - assets/rutinas/SaltoTijera.jpg
+    - assets/rutinas/FlexionInclinacionBrazos.jpg
+    - assets/rutinas/flexionesApoyoRodillas.png
+    - assets/rutinas/flexiones.png
+    - assets/rutinas/flexionesBrazosAbiertos.png
+    - assets/rutinas/estiramientoCobra.png
+    - assets/rutinas/estiramientoPecho.png
+    - assets/rutinas/plancha.png
+    - assets/rutinas/abdominales.png
+    - assets/rutinas/sentadillas.jpg
+    - assets/rutinas/pesoMuerto.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
